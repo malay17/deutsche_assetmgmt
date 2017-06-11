@@ -1,5 +1,6 @@
 package assetmanager;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -74,7 +75,9 @@ public class AssetManagerController {
 		if(shopsMap.size() != 0){
 			result = "Below is closest shop from your location";
 
-			for(Shop shop : shopsMap.values() ){
+			Iterator<Shop> iterator = shopsMap.values().iterator();
+			while(iterator.hasNext()){
+				Shop shop = (Shop)iterator.next();
 				double distance = calcDistance(latitude, shop.getShopAddress().getLatitude(), longitude, shop.getShopAddress().getLongitude());
 				if(distance < shortestDistance){
 					shortestDistance = distance;
